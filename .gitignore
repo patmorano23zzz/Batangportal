@@ -1,0 +1,29 @@
+# Uploaded files — don't commit user data
+uploads/profiles/*
+uploads/students/*
+uploads/school/*
+uploads/school-docs/*
+uploads/student-docs/*
+
+# Keep the upload folder structure
+!uploads/profiles/.gitkeep
+!uploads/students/.gitkeep
+!uploads/school/.gitkeep
+!uploads/school-docs/.gitkeep
+!uploads/student-docs/.gitkeep
+
+# Setup lock file (generated after running setup)
+setup.lock
+
+# One-time fix scripts
+fix_admin_password.php
+admin/fix_subjects.php
+
+# IDE / OS files
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+
+# PHP error logs
+*.log

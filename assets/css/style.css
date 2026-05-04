@@ -1,0 +1,351 @@
+/* ============================================================
+   BatangPortal — Main Stylesheet
+   ============================================================ */
+
+:root {
+    --primary: #1a73e8;
+    --primary-dark: #1557b0;
+    --sidebar-width: 240px;
+    --sidebar-collapsed: 60px;
+    --font: 'Nunito', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: var(--font);
+    background: #f4f6fb;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+#wrapper {
+    flex: 1;
+    min-height: calc(100vh - 56px - 40px);
+}
+
+#sidebar {
+    width: var(--sidebar-width);
+    min-height: 100%;
+    flex-shrink: 0;
+    transition: width .25s ease;
+    overflow-x: hidden;
+    border-right: 1px solid #e8ecf0;
+}
+
+.sidebar-inner {
+    width: var(--sidebar-width);
+}
+
+.sidebar-section {
+    margin-bottom: .5rem;
+}
+
+.sidebar-label {
+    font-size: .68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: #9aa0ac;
+    padding: .5rem 1rem .25rem;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .5rem 1rem;
+    color: #444;
+    text-decoration: none;
+    font-size: .88rem;
+    font-weight: 600;
+    border-radius: 0 2rem 2rem 0;
+    margin-right: .75rem;
+    transition: background .15s, color .15s;
+    white-space: nowrap;
+}
+
+.sidebar-link i {
+    font-size: 1rem;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-link:hover {
+    background: #e8f0fe;
+    color: var(--primary);
+}
+
+.sidebar-link.active {
+    background: #e8f0fe;
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.sidebar-link .badge {
+    margin-left: auto;
+    font-size: .65rem;
+}
+
+/* ============================================================
+   CONTENT
+   ============================================================ */
+#content {
+    overflow-x: auto;
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+
+.card-header {
+    background: transparent;
+    border-bottom: 1px solid #f0f0f0;
+    font-weight: 700;
+    padding: 1rem 1.25rem;
+}
+
+/* ============================================================
+   STAT CARDS
+   ============================================================ */
+.stat-card {
+    border-radius: 12px;
+    padding: 1.25rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}
+
+.stat-card .stat-icon {
+    font-size: 2.2rem;
+    opacity: .85;
+}
+
+.stat-card .stat-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.stat-card .stat-label {
+    font-size: .8rem;
+    opacity: .9;
+    font-weight: 600;
+}
+
+/* ============================================================
+   TABLES
+   ============================================================ */
+.table th {
+    font-size: .78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #6c757d;
+    border-top: none;
+    background: #f8f9fa;
+}
+
+.table td {
+    vertical-align: middle;
+    font-size: .88rem;
+}
+
+/* ============================================================
+   FORMS
+   ============================================================ */
+.form-label {
+    font-weight: 600;
+    font-size: .85rem;
+    color: #555;
+}
+
+.form-control, .form-select {
+    border-radius: 8px;
+    font-size: .9rem;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 .2rem rgba(26,115,232,.15);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: .88rem;
+}
+
+.btn-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+/* ============================================================
+   BADGES
+   ============================================================ */
+.badge {
+    font-size: .72rem;
+    font-weight: 700;
+    padding: .35em .6em;
+    border-radius: 6px;
+}
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: .75rem;
+}
+
+.page-header h1 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin: 0;
+    color: #222;
+}
+
+.page-header .breadcrumb {
+    margin: 0;
+    font-size: .8rem;
+}
+
+/* ============================================================
+   AVATAR
+   ============================================================ */
+.avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #e8f0fe;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: var(--primary);
+    font-size: .9rem;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   STATUS TIMELINE
+   ============================================================ */
+.timeline {
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: .5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e0e0e0;
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 1.25rem;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -1.1rem;
+    top: .3rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px var(--primary);
+}
+
+/* ============================================================
+   LOGIN PAGE
+   ============================================================ */
+.login-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.2);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+    font-size: .78rem;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+    #sidebar {
+        display: none;
+    }
+
+    #content {
+        padding: 1rem !important;
+    }
+
+    .stat-card .stat-value {
+        font-size: 1.4rem;
+    }
+}
+
+/* ============================================================
+   PRINT
+   ============================================================ */
+@media print {
+    #sidebar, nav.navbar, .footer, .btn, .no-print {
+        display: none !important;
+    }
+
+    #content {
+        padding: 0 !important;
+    }
+
+    .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
