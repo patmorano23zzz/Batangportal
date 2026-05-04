@@ -11,6 +11,22 @@
 <!-- Custom JS -->
 <script src="<?= APP_URL ?>/assets/js/main.js"></script>
 <script src="<?= APP_URL ?>/assets/js/bulk-actions.js"></script>
+<script>
+function toggleSidebar() {
+    const sidebar  = document.getElementById('sidebar');
+    const overlay  = document.getElementById('sidebarOverlay');
+    if (!sidebar) return;
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
+}
+// Close sidebar on nav link click (mobile)
+document.querySelectorAll('.sidebar-link').forEach(link => {
+    link.addEventListener('click', () => {
+        if (window.innerWidth < 992) toggleSidebar();
+    });
+});
+</script>
 </body>
 </html>
 <?php if (ob_get_level() > 0) ob_end_flush(); ?>

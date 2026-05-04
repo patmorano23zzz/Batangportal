@@ -51,13 +51,17 @@ $schoolName = $schoolInfo['school_name'] ?? APP_NAME;
             <?php else: ?>
                 <i class="bi bi-mortarboard-fill fs-4"></i>
             <?php endif; ?>
-            <span class="d-none d-md-inline"><?= htmlspecialchars($schoolName) ?></span>
+            <span class="d-none d-sm-inline"><?= htmlspecialchars($schoolName) ?></span>
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-            <span class="navbar-toggler-icon"></span>
+        <!-- Mobile sidebar toggle -->
+        <button id="sidebarToggleBtn" onclick="toggleSidebar()" aria-label="Toggle menu">
+            <i class="bi bi-list"></i>
         </button>
 
+        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="mainNav">
             <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
                 <!-- Notifications -->
@@ -230,6 +234,9 @@ $schoolName = $schoolInfo['school_name'] ?? APP_NAME;
         </div>
     </div>
     <!-- END SIDEBAR -->
+
+    <!-- Sidebar overlay (mobile) -->
+    <div id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
     <!-- MAIN CONTENT -->
     <div id="content" class="flex-grow-1 p-4" style="min-width:0">
