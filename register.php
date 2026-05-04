@@ -93,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create_account'])) {
     if (strlen($password) < 8) $errors[] = 'Password must be at least 8 characters.';
     if ($password !== $confirm) $errors[] = 'Passwords do not match.';
     if (!empty($email) && !validateEmail($email)) $errors[] = 'Invalid email address.';
+    if (empty($_POST['agree_terms']))  $errors[] = 'You must agree to the Terms and Conditions to register.';
 
     // Username uniqueness
     if (!empty($username)) {
@@ -404,6 +405,28 @@ if (!$student && !empty($_SESSION['reg_student'])) {
                 <div id="pwMatch" class="form-text"></div>
             </div>
 
+            <!-- Terms & Conditions -->
+            <div class="border rounded p-3 mb-4 bg-light">
+                <div class="form-check">
+                    <input type="checkbox" name="agree_terms" id="agreeTerms"
+                           class="form-check-input <?= isset($_POST['create_account']) && empty($_POST['agree_terms']) ? 'is-invalid' : '' ?>"
+                           required <?= !empty($_POST['agree_terms']) ? 'checked' : '' ?>>
+                    <label class="form-check-label small" for="agreeTerms">
+                        I have read and agree to the
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal" class="fw-700">
+                            Terms and Conditions
+                        </a>
+                        and
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal" class="fw-700">
+                            Privacy Policy
+                        </a>
+                        of <?= htmlspecialchars($schoolInfo['school_name'] ?? 'BatangPortal') ?>.
+                        <span class="text-danger">*</span>
+                    </label>
+                    <div class="invalid-feedback">You must agree to the Terms and Conditions to register.</div>
+                </div>
+            </div>
+
             <button type="submit" class="btn btn-primary w-100 py-2 fw-700 mb-2">
                 <i class="bi bi-person-check me-2"></i>Create Account
             </button>
@@ -422,6 +445,155 @@ if (!$student && !empty($_SESSION['reg_student'])) {
 
         <div class="text-center mt-3 small text-muted">
             &copy; <?= date('Y') ?> BatangPortal — DepEd Philippines
+        </div>
+    </div>
+</div>
+
+<!-- ── TERMS & CONDITIONS MODAL ── -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title fw-700" id="termsModalLabel">
+                    <i class="bi bi-file-earmark-text me-2"></i>Terms and Conditions &amp; Privacy Policy
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" style="font-size:.88rem;line-height:1.7">
+
+                <p class="text-muted small">
+                    Effective Date: <?= date('F d, Y') ?> &nbsp;·&nbsp;
+                    <?= htmlspecialchars($schoolInfo['school_name'] ?? 'BatangPortal') ?>,
+                    <?= htmlspecialchars($schoolInfo['address'] ?? 'Philippines') ?>
+                </p>
+
+                <h6 class="fw-700 mt-3">1. Acceptance of Terms</h6>
+                <p>
+                    By registering for an account on the <strong><?= htmlspecialchars($schoolInfo['school_name'] ?? 'BatangPortal') ?> Parent Portal</strong>
+                    ("the Portal"), you confirm that you are the parent or legal guardian of an enrolled learner at this school,
+                    and that you agree to be bound by these Terms and Conditions. If you do not agree, please do not proceed with registration.
+                </p>
+
+                <h6 class="fw-700 mt-3">2. Eligibility</h6>
+                <ul>
+                    <li>You must be the parent, legal guardian, or authorized representative of a currently enrolled learner.</li>
+                    <li>You must provide accurate and truthful information during registration.</li>
+                    <li>Only one (1) portal account may be linked per enrolled learner.</li>
+                    <li>You must be at least 18 years of age to register.</li>
+                </ul>
+
+                <h6 class="fw-700 mt-3">3. Account Responsibilities</h6>
+                <ul>
+                    <li>You are responsible for maintaining the confidentiality of your username and password.</li>
+                    <li>You must not share your account credentials with any other person.</li>
+                    <li>You must notify the school immediately if you suspect unauthorized access to your account.</li>
+                    <li>The school reserves the right to suspend or deactivate accounts that violate these terms.</li>
+                </ul>
+
+                <h6 class="fw-700 mt-3">4. Use of the Portal</h6>
+                <p>The Portal is provided solely for the following purposes:</p>
+                <ul>
+                    <li>Viewing your child's academic records, grades, and attendance</li>
+                    <li>Requesting official school documents (Form 137, Good Moral Certificate, Certificate of Enrollment, etc.)</li>
+                    <li>Receiving school announcements and notifications</li>
+                    <li>Downloading publicly available school documents</li>
+                </ul>
+                <p>
+                    Any use of the Portal for unauthorized, illegal, or harmful purposes is strictly prohibited
+                    and may result in account termination and referral to appropriate authorities.
+                </p>
+
+                <h6 class="fw-700 mt-3">5. Privacy Policy &amp; Data Collection</h6>
+                <p>
+                    In compliance with the <strong>Data Privacy Act of 2012 (Republic Act No. 10173)</strong>
+                    and the National Privacy Commission's guidelines, we collect and process the following personal data:
+                </p>
+                <ul>
+                    <li><strong>Parent/Guardian:</strong> Full name, contact number, email address, relationship to learner</li>
+                    <li><strong>Learner:</strong> LRN, name, date of birth, grade level, section, academic records, attendance</li>
+                </ul>
+                <p>This data is collected for the following purposes:</p>
+                <ul>
+                    <li>To provide access to your child's academic information</li>
+                    <li>To process document requests</li>
+                    <li>To send school-related notifications and announcements</li>
+                    <li>To comply with DepEd reporting requirements</li>
+                </ul>
+                <p>
+                    Your personal data will <strong>not</strong> be sold, rented, or shared with third parties
+                    outside of the school and the Department of Education (DepEd) without your consent,
+                    except as required by law.
+                </p>
+
+                <h6 class="fw-700 mt-3">6. Data Retention</h6>
+                <p>
+                    Personal data will be retained for the duration of the learner's enrollment and for a period
+                    required by DepEd regulations thereafter. You may request correction or deletion of your
+                    personal data by contacting the school registrar.
+                </p>
+
+                <h6 class="fw-700 mt-3">7. Document Requests</h6>
+                <ul>
+                    <li>Document requests are subject to the school's processing schedule and requirements.</li>
+                    <li>Processing times are estimates and may vary depending on school workload.</li>
+                    <li>The school reserves the right to require additional verification before releasing documents.</li>
+                    <li>Fees, if applicable, must be settled before documents are released.</li>
+                </ul>
+
+                <h6 class="fw-700 mt-3">8. Accuracy of Information</h6>
+                <p>
+                    The school endeavors to keep academic records accurate and up to date.
+                    If you believe there is an error in your child's records, please contact the class adviser
+                    or school registrar directly. The Portal displays data as encoded by school personnel.
+                </p>
+
+                <h6 class="fw-700 mt-3">9. Limitation of Liability</h6>
+                <p>
+                    The school shall not be liable for any loss or damage arising from your use of the Portal,
+                    including but not limited to unauthorized access to your account due to your failure to
+                    maintain the security of your credentials.
+                </p>
+
+                <h6 class="fw-700 mt-3">10. Changes to These Terms</h6>
+                <p>
+                    The school reserves the right to update these Terms and Conditions at any time.
+                    Continued use of the Portal after changes are posted constitutes acceptance of the revised terms.
+                    You will be notified of significant changes through the Portal's announcement system.
+                </p>
+
+                <h6 class="fw-700 mt-3">11. Contact</h6>
+                <p>
+                    For questions, concerns, or data privacy requests, please contact:
+                </p>
+                <ul>
+                    <li><strong>School:</strong> <?= htmlspecialchars($schoolInfo['school_name'] ?? 'BatangPortal') ?></li>
+                    <?php if (!empty($schoolInfo['address'])): ?>
+                    <li><strong>Address:</strong> <?= htmlspecialchars($schoolInfo['address']) ?></li>
+                    <?php endif; ?>
+                    <?php if (!empty($schoolInfo['contact_number'])): ?>
+                    <li><strong>Contact:</strong> <?= htmlspecialchars($schoolInfo['contact_number']) ?></li>
+                    <?php endif; ?>
+                    <?php if (!empty($schoolInfo['email'])): ?>
+                    <li><strong>Email:</strong> <?= htmlspecialchars($schoolInfo['email']) ?></li>
+                    <?php endif; ?>
+                    <?php if (!empty($schoolInfo['principal_name'])): ?>
+                    <li><strong>School Head:</strong> <?= htmlspecialchars($schoolInfo['principal_name']) ?></li>
+                    <?php endif; ?>
+                </ul>
+
+                <div class="alert alert-info small mt-3 mb-0">
+                    <i class="bi bi-shield-check me-1"></i>
+                    This portal is operated in accordance with <strong>DepEd Order No. 32, s. 2023</strong>
+                    (Basic Education Data Privacy Policy) and the <strong>Data Privacy Act of 2012 (RA 10173)</strong>.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        onclick="document.getElementById('agreeTerms').checked=true">
+                    <i class="bi bi-check-circle me-1"></i>I Understand &amp; Agree
+                </button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
 </div>
