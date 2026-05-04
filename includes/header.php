@@ -59,11 +59,8 @@ $schoolName = $schoolInfo['school_name'] ?? APP_NAME;
             <i class="bi bi-list"></i>
         </button>
 
-        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="mainNav">
-            <ul class="navbar-nav ms-auto align-items-lg-center gap-1">
+        <!-- Right nav items — always visible, no collapse -->
+        <ul class="navbar-nav ms-auto align-items-center flex-row gap-1">
                 <!-- Notifications -->
                 <li class="nav-item dropdown">
                     <a class="nav-link position-relative" href="#" data-bs-toggle="dropdown">
@@ -119,7 +116,6 @@ $schoolName = $schoolInfo['school_name'] ?? APP_NAME;
                     </ul>
                 </li>
             </ul>
-        </div>
     </div>
 </nav>
 
